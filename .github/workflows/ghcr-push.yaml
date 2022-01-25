@@ -22,6 +22,8 @@ jobs:
       fail-fast: false
       matrix:
         install_latest: [ true, false ]
+        os: ['centos7']
+        flavor: ['drone']
 
     steps:
       # Checkout push-to-registry action github repository
@@ -39,11 +41,8 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAGS }}
-          base-image: centos:centos7
-          entrypoint: |
-            bash
-            -c
-            echo 'hello world'
+          containerfiles: |
+            dockerfiles/${{ matrix.os }}/${{ matrix.flavor }}/Dockerfile
           oci: true
 
       # Push the image to GHCR (Image Registry)
