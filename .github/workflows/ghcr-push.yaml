@@ -43,7 +43,7 @@ jobs:
           tags: ${{ env.IMAGE_TAGS }}
           context: dockerfiles/${{ matrix.os }}/${{ matrix.flavor }}
           containerfiles: |
-            Dockerfile
+            dockerfiles/${{ matrix.os }}/${{ matrix.flavor }}/Dockerfile
           oci: true
 
       # Push the image to GHCR (Image Registry)
