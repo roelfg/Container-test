@@ -1,4 +1,4 @@
 FROM centos:centos7
 #COPY . /app
-RUN ./build.sh
-CMD bash
+ADD bootstrap.sh /
+RUN chmod +x bootstrap.sh && /bootstrap.sh
