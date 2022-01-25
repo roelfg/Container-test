@@ -39,7 +39,7 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAGS }}
-          base-image: busybox:latest
+          base-image: centos:centos7
           entrypoint: |
             bash
             -c
