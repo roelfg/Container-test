@@ -8,5 +8,6 @@ fi
 DOCKERFILE=$1
 
 while read SRC DST; do
-	rsync -av --mkpath common/${SRC} $(dirname ${DOCKERFILE})${DST}
+	mkdir -p $(dirname ${DOCKERFILE})$(dirname ${DST}) 
+	rsync -av common/${SRC} $(dirname ${DOCKERFILE})${DST}
 done < <(awk '/^COPY/{ print $2,$3 }' ${DOCKERFILE})
