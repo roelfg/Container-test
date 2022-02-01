@@ -1,0 +1,8 @@
+# Where the remaining configuration files are.
+LOCAL_CONFIG_DIR = /etc/condor/config.d
+
+# Subdirectory writable with user privileges for use in this pilot.
+LOCAL_DIR = $ENV(CONDORDIR)
+LOCK = $ENV(CONDORLOCKDIR)
+LOG = $ENV(CONDORLOGDIR)
+EXECUTE=$(LOCAL_DIR)/execute

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Copyright 2019 University of Bonn
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+if [ -r /cephfs/cobald/condor_cobald.config ]; then
+	cat /cephfs/cobald/condor_cobald.config
+elif [ -r /home/physik-services/cobald/condor_cobald.config ]; then
+	cat /home/physik-services/cobald/condor_cobald.config
+fi

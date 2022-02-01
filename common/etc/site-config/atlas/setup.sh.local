@@ -1,0 +1,7 @@
+# Copyright 2019-2021 University of Bonn
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+echo "FRONTIER_SERVER before modification: \"${FRONTIER_SERVER}\"."
+export FRONTIER_SERVER="`${VO_ATLAS_SW_DIR}/local/bin/cric-site-info -f -s UNI-BONN`"
+echo "FRONTIER_SERVER for UNI-BONN adjusted to value \"${FRONTIER_SERVER}\"."

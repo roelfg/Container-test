@@ -15,3 +15,9 @@ COPY etc/profile.d/22-condor_fixes.sh /etc/profile.d/22-condor_fixes.sh
 COPY etc/profile.d/60-setupATLAS.sh /etc/profile.d/60-setupATLAS.sh
 COPY etc/profile.d/60-setupBelle.sh /etc/profile.d/60-setupBelle.sh
 COPY etc/profile.d/70-belleEnv.sh /etc/profile.d/70-belleEnv.sh
+COPY etc/condor/grid_mapfile /etc/condor/grid_mapfile
+COPY etc/condor/config.d/000.condor_constants.cfg /etc/condor/config.d/000.condor_constants.cfg
+COPY etc/condor/config.d/004.condor_partitionable_slots.cfg /etc/condor/config.d/004.condor_partitionable_slots.cfg
+COPY etc/condor/config.d/010.condor_security.cfg /etc/condor/config.d/010.condor_security.cfg
+COPY etc/site_cofig/atlas/setup.sh.local /etc/site_cofig/atlas/setup.sh.local
+COPY usr/local/bin/get-condor-cobald-config /usr/local/bin/get-condor-cobald-config
