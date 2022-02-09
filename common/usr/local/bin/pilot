@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Copyright 2019-2021 University of Bonn and 2019 Karlsruhe Institute of Technology KIT
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+source /etc/profile
+
+if [ ${#*} -ne 1 ]; then
+	echo "Please specify the allowed VO"
+	exit 1
+fi
+
+# Shell script argument parsing needs to be done outside of functions.
+export VO=$1
+
+function setup_environment {
+	# job working directory
+	export JWD=${PWD}
+	export CONDORDIR=${JWD}/condor
+	export CONDORLOCKDIR=${CONDORDIR}/lock
+	export CONDORLOGDIR=${CONDORDIR}/log
+	if [ -z "${X509_USER_PROXY}" ]; then
+		export X509_USER_PROXY=${JWD}/proxy
+	fi
+	# For use in PANDA_HOSTNAME (for ATLAS), Pilot uses "uname -n" otherwise.
+	HNAME_FULL=$(hostname -f 2>/dev/null)
+	if [ -n "${TardisDroneUuid}" ]; then
+		export CONDORLOGDIR="${CONDORLOGDIR}/${TardisDroneUuid}"
+		if [ -n "${HNAME_FULL}" ]; then
+			export PANDA_HOSTNAME=${HNAME_FULL}.${TardisDroneUuid}
+		else
+			export PANDA_HOSTNAME=$(uname -n).${TardisDroneUuid}
+		fi
+	else
+		TS=$(date +%s_%N)
+		export CONDORLOGDIR="${CONDORLOGDIR}/${TS}"
+		if [ -n "${HNAME_FULL}" ]; then
+			export PANDA_HOSTNAME=${HNAME_FULL}
+		fi
+	fi
+	export CONDOR_STARTER_JOB_ENVIRONMENT=""
+	if [ -n "${PANDA_HOSTNAME}" ]; then
+		export CONDOR_STARTER_JOB_ENVIRONMENT="${CONDOR_STARTER_JOB_ENVIRONMENT} PANDA_HOSTNAME=${PANDA_HOSTNAME}"
+	fi
+	if [ -d "/etc/site-config/${VO}" ]; then
+		if [ "x${VO}" = "xatlas" ]; then
+			export CONDOR_STARTER_JOB_ENVIRONMENT="${CONDOR_STARTER_JOB_ENVIRONMENT} ATLAS_LOCAL_AREA='/etc/site-config/${VO}'"
+		fi
+	fi
+	if [ "x${VO}" = "xatlas" ]; then
+		# Disallow ATLAS pilot from sending immediate 'kill -9' to anything with PPID=1 running as pilot user.
+		export CONDOR_STARTER_JOB_ENVIRONMENT="${CONDOR_STARTER_JOB_ENVIRONMENT} PILOT_NOKILL=1"
+	fi
+}
+
+function setup_condor_directories {
+	mkdir -p ${CONDORLOCKDIR}
+	mkdir -p ${CONDORLOGDIR}
+	mkdir -p ${CONDORDIR}/execute
+}
+
+function setup_condor_config {
+        export CONDOR_CONFIG=/etc/condor/condor_config.local
+}
+
+function test_condor_config {
+	condor_status &> /dev/null
+	if [ $? != 0 ]; then
+		echo "HTCondor config not working properly! Debug output from condor_status:"
+		condor_status -debug
+		exit 1
+	fi
+}
+
+setup_environment
+setup_condor_directories
+setup_condor_config
+test_condor_config
+
+echo $$ > ${CONDORDIR}/condor_master.pid
+
+exec /usr/sbin/condor_master -f
