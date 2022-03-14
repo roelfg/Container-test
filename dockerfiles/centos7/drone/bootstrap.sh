@@ -75,6 +75,12 @@ yum install -y https://research.cs.wisc.edu/htcondor/repo/8.8/el7/release/htcond
 echo "Update again..."
 yum -y update
 
+echo "Install Python3.6."
+yum -y install	python36
+
+echo "Run Python3.6 and install condor-gitconfig."
+python3.6 -m pip install --no-cache-dir condor_git_config
+
 echo "Install HTCondor..."
 yum -y install condor
 

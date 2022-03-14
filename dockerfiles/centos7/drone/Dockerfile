@@ -18,11 +18,11 @@ COPY etc/profile.d/70-belleEnv.sh /etc/profile.d/70-belleEnv.sh
 COPY etc/condor/grid_mapfile /etc/condor/grid_mapfile
 COPY etc/condor/condor_config.local /etc/condor/condor_config.local
 COPY etc/condor/config.d/000.condor_constants.cfg /etc/condor/config.d/000.condor_constants.cfg
-COPY etc/condor/config.d/004.condor_partitionable_slots.cfg /etc/condor/config.d/004.condor_partitionable_slots.cfg
-COPY etc/condor/config.d/005.condor_node.cfg /etc/condor/config.d/005.condor_node.cfg
-COPY etc/condor/config.d/008.gridka_wn.cfg /etc/condor/config.d/008.gridka_wn.cfg
-COPY etc/condor/config.d/010.condor_security.cfg /etc/condor/config.d/010.condor_security.cfg
-COPY etc/condor/config.d/100.worker.cfg /etc/condor/config.d/100.worker.cfg
+#COPY etc/condor/config.d/004.condor_partitionable_slots.cfg /etc/condor/config.d/004.condor_partitionable_slots.cfg
+#COPY etc/condor/config.d/005.condor_node.cfg /etc/condor/config.d/005.condor_node.cfg
+#COPY etc/condor/config.d/008.gridka_wn.cfg /etc/condor/config.d/008.gridka_wn.cfg
+#COPY etc/condor/config.d/010.condor_security.cfg /etc/condor/config.d/010.condor_security.cfg
+#COPY etc/condor/config.d/100.worker.cfg /etc/condor/config.d/100.worker.cfg
 COPY etc/site-config/atlas/setup.sh.local /etc/site-config/atlas/setup.sh.local
 COPY usr/local/bin/pilot /usr/local/bin/pilot
 COPY usr/local/bin/get-condor-cobald-config /usr/local/bin/get-condor-cobald-config
