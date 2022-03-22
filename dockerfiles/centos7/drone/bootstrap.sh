@@ -79,8 +79,8 @@ echo "Install Python3.6."
 yum -y install	python36
 
 echo "Create virtual environment and install condor-git-config."
-python3.6 -m venv /usr/local/lib/env
-source /usr/local/lib/env/bin/activate
+python3.6 -m venv /opt/env
+source /opt/env/bin/activate
 python3.6 -m pip install --no-cache-dir condor_git_config
 deactivate
 
