@@ -26,4 +26,5 @@ COPY etc/condor/config.d/000.condor_constants.cfg /etc/condor/config.d/000.condo
 COPY etc/site-config/atlas/setup.sh.local /etc/site-config/atlas/setup.sh.local
 COPY usr/local/bin/pilot /usr/local/bin/pilot
 COPY usr/local/bin/get-condor-cobald-config /usr/local/bin/get-condor-cobald-config
+COPY usr/local/bin/call-condor-git-config /usr/local/bin/call-condor-git-config
 COPY usr/libexec/condor_pilot/jobwrapper.sh /usr/libexec/condor_pilot/jobwrapper.sh

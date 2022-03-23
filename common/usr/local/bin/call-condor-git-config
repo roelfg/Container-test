@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Activate and execute condor-git-config
+source /opt/env/bin/activate
+/opt/env/condor-git-config --branch main --blacklist cip000 --recurse https://github.com/roelfg/condor-repos.git
+deactivate
