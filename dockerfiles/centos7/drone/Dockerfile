@@ -27,8 +27,7 @@ COPY etc/site-config/atlas/setup.sh.local /etc/site-config/atlas/setup.sh.local
 COPY usr/local/bin/pilot /usr/local/bin/pilot
 COPY usr/local/bin/get-condor-cobald-config /usr/local/bin/get-condor-cobald-config
 COPY usr/local/bin/call-condor-git-config /usr/local/bin/call-condor-git-config
+COPY usr/local/bin/systemctl /usr/local/bin/systemctl
 COPY usr/libexec/condor_pilot/jobwrapper.sh /usr/libexec/condor_pilot/jobwrapper.sh
-COPY systemctl3.py /usr/bin/systemctl
-RUN chmod a+x /usr/bin/systemctl
 #RUN chmod +x /usr/local/bin/pilot
 ENTRYPOINT ["/usr/local/bin/pilot"]
